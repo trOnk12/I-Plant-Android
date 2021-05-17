@@ -1,6 +1,7 @@
 package com.example.iplant.ui
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,7 +13,7 @@ fun IPlantApp() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "nearbyDevice") {
-        composable("nearbyDevice") { NearByDeviceScreen(nearbyDeviceViewModel = viewModel()) }
+        composable("nearbyDevice") { NearByDeviceScreen() }
     }
 }
 
