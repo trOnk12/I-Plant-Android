@@ -1,6 +1,5 @@
-package com.example.domain
+package com.example.iplant.ui.common.interactor
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow

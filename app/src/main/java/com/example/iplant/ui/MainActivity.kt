@@ -1,4 +1,4 @@
-package com.example.i_plant
+package com.example.iplant.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
