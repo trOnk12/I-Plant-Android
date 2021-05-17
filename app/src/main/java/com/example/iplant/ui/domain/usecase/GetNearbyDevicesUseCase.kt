@@ -5,6 +5,7 @@ import com.example.iplant.ui.data.IPlantDeviceRepositoryImpl
 import com.example.iplant.ui.domain.entity.PlantDevice
 import com.example.iplant.ui.domain.repository.IPlantDeviceRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import javax.inject.Inject
 
 class GetNearbyDevicesUseCase @Inject constructor(

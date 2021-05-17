@@ -4,5 +4,5 @@ import com.example.iplant.ui.domain.entity.PlantDevice
 import kotlinx.coroutines.flow.Flow
 
 interface IPlantDeviceRepository {
-    fun getNearbyDevice() : Flow<List<PlantDevice>>
+    fun getNearbyDevice() : Flow<PlantDevice>
 }

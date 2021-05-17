@@ -13,6 +13,9 @@ import com.example.iplant.ui.feature.nearbydevice.model.UIPlantDevice
 fun NearByDeviceScreen(nearbyDeviceViewModel: NearbyDeviceViewModel = hiltNavGraphViewModel()) {
     val nearbyDeviceState = nearbyDeviceViewModel.liveData.observeAsState()
 
+    nearbyDeviceState.value?.let { state ->
+        NearByDeviceContent(nearbyDevices = state.devices)
+    }
 }
 
 @Composable

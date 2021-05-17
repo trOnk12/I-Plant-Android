@@ -1,3 +1,9 @@
 package com.example.iplant.ui.domain.entity
 
-data class PlantDevice(val id:String)
+import java.time.LocalDate
+
+data class PlantDevice(val id: String, val lastSeen: LocalDate) {
+    fun isExpired(): Boolean {
+        return false
+    }
+}
