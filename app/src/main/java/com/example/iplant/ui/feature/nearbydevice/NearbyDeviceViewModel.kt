@@ -3,6 +3,7 @@ package com.example.iplant.ui.feature.nearbydevice
 import androidx.lifecycle.viewModelScope
 import com.example.iplant.ui.common.redux.ReduxViewModel
 import com.example.iplant.ui.domain.usecase.GetNearbyDevicesUseCase
+import com.example.iplant.ui.feature.nearbydevice.model.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,7 +15,7 @@ class NearbyDeviceViewModel @Inject constructor(getNearbyDevicesUseCase: GetNear
     init {
         viewModelScope.launch {
             getNearbyDevicesUseCase.observe()
-                .collectAndSetState {  }
+                .collectAndSetState { copy(devices = it.map()) }
         }
     }
 

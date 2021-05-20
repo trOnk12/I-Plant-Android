@@ -10,8 +10,6 @@ class IPlantDeviceRepositoryImpl @Inject constructor(
     private val iPlantBluetoothSource: IPlantBluetoothSource
 ) : IPlantDeviceRepository {
 
-    override fun getNearbyDevice(): Flow<<List<PlantDevice>> {
-        return iPlantBluetoothSource.getNearby()
-    }
+    override fun getNearbyDevice(): Flow<List<PlantDevice>> = iPlantBluetoothSource.getNearby()
 
 }
