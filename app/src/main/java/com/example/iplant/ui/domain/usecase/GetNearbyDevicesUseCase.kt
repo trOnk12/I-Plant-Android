@@ -12,7 +12,8 @@ class GetNearbyDevicesUseCase @Inject constructor(
     private val iPlantDeviceRepository: IPlantDeviceRepositoryImpl
 ) : SubjectInteractor<Unit, List<PlantDevice>>() {
 
-    override fun createObservable(params: Unit): Flow<List<PlantDevice>> =
-        iPlantDeviceRepository.getNearbyDevice()
+    override fun createObservable(params: Unit): Flow<List<PlantDevice>> {
+      return iPlantDeviceRepository.getNearbyDevice()
+    }
 
 }

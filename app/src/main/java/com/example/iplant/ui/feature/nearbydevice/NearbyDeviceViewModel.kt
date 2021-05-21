@@ -14,9 +14,12 @@ class NearbyDeviceViewModel @Inject constructor(getNearbyDevicesUseCase: GetNear
 
     init {
         viewModelScope.launch {
-            getNearbyDevicesUseCase.observe()
+            getNearbyDevicesUseCase
+                .observe()
                 .collectAndSetState { copy(devices = it.map()) }
         }
+
+        getNearbyDevicesUseCase(Unit)
     }
 
 }

@@ -5,6 +5,7 @@ import com.example.iplant.ui.domain.entity.PlantDevice
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flow
 import no.nordicsemi.android.support.v18.scanner.BluetoothLeScannerCompat
 import no.nordicsemi.android.support.v18.scanner.ScanCallback
 import no.nordicsemi.android.support.v18.scanner.ScanResult
@@ -15,17 +16,22 @@ class IPlantBluetoothSource @Inject constructor(private val scanner: BluetoothLe
 
     private val nearbyDevices = mutableMapOf<String, PlantDevice>()
 
-    fun getNearby(): Flow<List<PlantDevice>> = callbackFlow {
-        val scanCallback = object : ScanCallback() {
-            override fun onScanResult(callbackType: Int, result: ScanResult) {
-                trySend(filterOnlyRecentDevices(nearbyDevices, result.toPlantDevice()))
-            }
-        }
 
-        scanner.startScan(scanCallback)
-
-        awaitClose { scanner.stopScan(scanCallback) }
+    fun getNearby(): Flow<List<PlantDevice>> = flow {
+        emit(listOf(PlantDevice("test", LocalDate.now())))
     }
+
+//    fun getNearby(): Flow<List<PlantDevice>> = callbackFlow {
+//        val scanCallback = object : ScanCallback() {
+//            override fun onScanResult(callbackType: Int, result: ScanResult) {
+//                trySend(filterOnlyRecentDevices(nearbyDevices, result.toPlantDevice()))
+//            }
+//        }
+//
+//        scanner.startScan(scanCallback)
+//
+//        awaitClose { scanner.stopScan(scanCallback) }
+//    }
 
     private fun filterOnlyRecentDevices(
         nearbyDevices: MutableMap<String, PlantDevice>,
