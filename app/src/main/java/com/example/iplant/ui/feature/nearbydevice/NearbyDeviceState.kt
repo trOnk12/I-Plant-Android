@@ -1,8 +1,8 @@
 package com.example.iplant.ui.feature.nearbydevice
 
-import com.example.iplant.ui.feature.nearbydevice.model.UIPlantDevice
+import com.example.iplant.ui.feature.nearbydevice.model.PlantDevice
 
 data class NearbyDeviceState(
-    val devices: List<UIPlantDevice> = emptyList(),
+    val devices: List<PlantDevice> = emptyList(),
     val isEmpty: Boolean = true
 )
