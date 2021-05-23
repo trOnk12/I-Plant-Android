@@ -10,14 +10,16 @@ import no.nordicsemi.android.support.v18.scanner.ScanResult
 import java.time.LocalDate
 import javax.inject.Inject
 
-class IPlantBluetoothSource @Inject constructor(private val scanner: BluetoothLeScannerCompat) {
+class IPlantBluetoothSource @Inject constructor(
+    private val scanner: BluetoothLeScannerCompat
+) {
 
     private val nearbyDevices = mutableMapOf<String, PlantDeviceEntity>()
 
     fun getNearby(): Flow<List<PlantDeviceEntity>> = flow {
         emit(mockNearbyDevices)
     }
-
+//
 //    fun getNearby(): Flow<List<PlantDevice>> = callbackFlow {
 //        val scanCallback = object : ScanCallback() {
 //            override fun onScanResult(callbackType: Int, result: ScanResult) {
@@ -35,21 +37,27 @@ class IPlantBluetoothSource @Inject constructor(private val scanner: BluetoothLe
         recentlyScannedDeviceEntity: PlantDeviceEntity
     ): List<PlantDeviceEntity> {
         val nonExpiredDevices = filterExpiredDevices(nearbyDevices)
-        val updatedDevices = updateNearbyDevices(nonExpiredDevices, recentlyScannedDeviceEntity)
+        val updatedDevices = updateRecentlyScannedDevice(
+            nearbyDevices = nonExpiredDevices,
+            recentlyScannedDevice = recentlyScannedDeviceEntity
+        )
 
         return updatedDevices.values.toList()
     }
 
-    private fun filterExpiredDevices(nearbyDevices: MutableMap<String, PlantDeviceEntity>): Map<String, PlantDeviceEntity> =
+    private fun filterExpiredDevices(nearbyDevices: MutableMap<String, PlantDeviceEntity>) =
         nearbyDevices.filterValues { it.isExpired() }
 
-    private fun updateNearbyDevices(
+    private fun updateRecentlyScannedDevice(
         nearbyDevices: Map<String, PlantDeviceEntity>,
-        recentlyScannedDeviceEntity: PlantDeviceEntity
+        recentlyScannedDevice: PlantDeviceEntity
     ): MutableMap<String, PlantDeviceEntity> {
         val mutableNearbyDevices = nearbyDevices.toMutableMap()
 
-        return mutableNearbyDevices.putOrReplace(recentlyScannedDeviceEntity.id, recentlyScannedDeviceEntity)
+        return mutableNearbyDevices.putOrReplace(
+            recentlyScannedDevice.id,
+            recentlyScannedDevice
+        )
     }
 
 }
