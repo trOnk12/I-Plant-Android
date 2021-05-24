@@ -4,14 +4,15 @@ import android.bluetooth.BluetoothDevice
 import com.example.iplant.ui.domain.entity.NetworkEntity
 import com.example.iplant.ui.domain.service.PlantDeviceManager
 import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import no.nordicsemi.android.ble.observer.ConnectionObserver
 import javax.inject.Inject
 
-class PlantDeviceBleManager @Inject constructor(
-    private val bluetoothDevice : BluetoothDevice
+class PlantDeviceBleManager @AssistedInject constructor(
+   @Assisted private val bluetoothDevice : BluetoothDevice
 ) : PlantDeviceManager {
 
     override suspend fun setDeviceName(name: String) {

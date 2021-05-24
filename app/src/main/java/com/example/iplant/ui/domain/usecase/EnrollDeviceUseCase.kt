@@ -7,6 +7,7 @@ import com.example.iplant.ui.domain.entity.NetworkEntity
 import com.example.iplant.ui.domain.service.PlantDeviceConnector
 import com.example.iplant.ui.domain.service.PlantDeviceManager
 import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -14,7 +15,7 @@ import javax.inject.Inject
 //2. Set name of the device
 //3. Set SSID and password of the network
 //4. Wait for the device to connect to WiFi
-class EnrollDeviceUseCase @Inject constructor(
+class EnrollDeviceUseCase @AssistedInject constructor(
     @Assisted private val plantDeviceBleManager: PlantDeviceBleManager
 ) : SubjectInteractor<EnrollmentDataEntity, EnrollmentStatus>() {
 

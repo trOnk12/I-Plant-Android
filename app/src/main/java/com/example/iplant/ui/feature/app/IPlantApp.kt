@@ -1,4 +1,4 @@
-package com.example.iplant.ui
+package com.example.iplant.ui.feature.app
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
