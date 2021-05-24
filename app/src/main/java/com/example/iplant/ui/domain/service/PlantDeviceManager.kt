@@ -1,7 +1,8 @@
 package com.example.iplant.ui.domain.service
 
-import com.example.iplant.ui.feature.nearbydevice.model.PlantDevice
+import com.example.iplant.ui.domain.entity.NetworkEntity
 
 interface PlantDeviceManager {
-    suspend fun connect(plantDevice: PlantDevice)
+    suspend fun setDeviceName(name: String)
+    suspend fun connectToNetwork(networkEntity: NetworkEntity)
 }
