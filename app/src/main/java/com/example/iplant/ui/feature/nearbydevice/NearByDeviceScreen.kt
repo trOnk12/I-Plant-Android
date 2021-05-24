@@ -45,7 +45,7 @@ fun NearbyDeviceItem(plantDevice: PlantDevice, onClick: (PlantDevice) -> Unit) {
             contentDescription = null
         )
         Column {
-            Text(text = "this is some plant name with id: ${plantDevice.id}")
+            Text(text = "this is some plant name with id: ${plantDevice.id} and last seen $plantDevice")
         }
     }
 }

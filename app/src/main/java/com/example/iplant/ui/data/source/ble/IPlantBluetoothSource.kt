@@ -4,7 +4,7 @@ import com.example.iplant.ui.domain.entity.PlantDeviceEntity
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import java.time.LocalDate
+import kotlinx.datetime.Clock
 import javax.inject.Inject
 import no.nordicsemi.android.support.v18.scanner.*
 
@@ -28,5 +28,5 @@ class IPlantBluetoothSource @Inject constructor(
 }
 
 fun ScanResult.toPlantDeviceEntity(): PlantDeviceEntity {
-    return PlantDeviceEntity(device.address, LocalDate.now())
+    return PlantDeviceEntity(device.address, Clock.System.now())
 }

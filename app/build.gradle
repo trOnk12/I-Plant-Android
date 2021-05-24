@@ -79,5 +79,7 @@ dependencies {
 
     implementation 'no.nordicsemi.android.support.v18:scanner:1.4.2'
 
+    implementation "org.jetbrains.kotlinx:kotlinx-datetime:0.2.0"
+
 
 }
