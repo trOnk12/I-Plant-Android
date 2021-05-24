@@ -25,6 +25,7 @@ class IPlantBluetoothSource @Inject constructor(
 
         awaitClose { scanner.stopScan(scanCallback) }
     }
+
 }
 
 fun ScanResult.toPlantDeviceEntity(): PlantDeviceEntity {
