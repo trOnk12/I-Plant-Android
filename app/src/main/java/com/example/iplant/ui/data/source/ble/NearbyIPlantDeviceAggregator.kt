@@ -29,7 +29,7 @@ class NearbyIPlantDeviceAggregator @Inject constructor() {
         val snapShot = nearbyDevices.toMutableMap()
 
         return snapShot.putOrReplace(
-            recentlyScannedDevice.id,
+            recentlyScannedDevice.deviceId,
             recentlyScannedDevice
         )
     }

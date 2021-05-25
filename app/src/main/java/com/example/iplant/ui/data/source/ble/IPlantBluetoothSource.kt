@@ -30,5 +30,5 @@ class IPlantBluetoothSource @Inject constructor(
 }
 
 fun ScanResult.toPlantDeviceEntity(): PlantDeviceEntity {
-    return PlantDeviceEntity(device.address, Clock.System.now())
+    return PlantDeviceEntity(device, Clock.System.now())
 }

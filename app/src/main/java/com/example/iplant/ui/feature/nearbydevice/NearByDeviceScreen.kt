@@ -23,19 +23,21 @@ fun NearByDeviceScreen(nearbyDeviceViewModel: NearbyDeviceViewModel = hiltNavGra
     val nearbyDeviceState by nearbyDeviceViewModel.liveData.observeAsState()
 
     if (nearbyDeviceState != null) {
-        NearbyDeviceList(nearbyDevices = nearbyDeviceState!!.devices)
+        NearbyDeviceList(
+            onClick = { nearbyDeviceViewModel.connectToDevice(it.bluetoothDevice) },
+            nearbyDevices = nearbyDeviceState!!.devices
+        )
     }
 }
 
 @Composable
-fun NearbyDeviceList(nearbyDevices: List<PlantDevice>) {
+fun NearbyDeviceList(onClick: (PlantDevice) -> Unit, nearbyDevices: List<PlantDevice>) {
     LazyColumn {
         items(nearbyDevices) { nearbyDevice ->
-            NearbyDeviceItem(plantDevice = nearbyDevice) { Log.d("TEST", "$nearbyDevice") }
+            NearbyDeviceItem(plantDevice = nearbyDevice) { onClick(it) }
         }
     }
 }
-
 
 @Composable
 fun NearbyDeviceItem(plantDevice: PlantDevice, onClick: (PlantDevice) -> Unit) {

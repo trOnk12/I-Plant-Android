@@ -2,6 +2,7 @@ package com.example.iplant.ui.data.ble
 
 import android.bluetooth.BluetoothDevice
 import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,6 +11,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import no.nordicsemi.android.ble.observer.ConnectionObserver
 import javax.inject.Inject
+
+
+@AssistedFactory
+interface PlantDeviceBleConnectorFactory {
+    fun create(coroutineScope: CoroutineScope) : PlantDeviceBleConnector
+}
 
 class PlantDeviceBleConnector @AssistedInject constructor(
     @Assisted private val externalScope: CoroutineScope,
