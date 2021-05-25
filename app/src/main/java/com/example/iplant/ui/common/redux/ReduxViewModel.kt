@@ -67,7 +67,7 @@ abstract class ReduxViewModel<S> constructor(initialState: S) : ViewModel() {
         return state.map { prop1.get(it) }.distinctUntilChanged()
     }
 
-    protected suspend fun setState(reducer: S.() -> S) {
+    private suspend fun setState(reducer: S.() -> S) {
         stateMutex.withLock {
             state.value = reducer(state.value)
         }
@@ -77,7 +77,7 @@ abstract class ReduxViewModel<S> constructor(initialState: S) : ViewModel() {
         launch { this@ReduxViewModel.setState(reducer) }
     }
 
-    protected suspend fun withState(block: (S) -> Unit) {
+    private suspend fun withState(block: (S) -> Unit) {
         stateMutex.withLock {
             block(state.value)
         }
