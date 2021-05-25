@@ -14,13 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NearbyDeviceViewModel @Inject constructor(
-    connectToDevicesUseCaseFactory: ConnectToDeviceUseCaseFactory,
     getNearbyDevicesUseCase: GetNearbyDevicesUseCase
 ) : ReduxViewModel<NearbyDeviceState>(NearbyDeviceState()) {
-
-    private val connectToDeviceUseCase by lazy {
-        connectToDevicesUseCaseFactory.create(viewModelScope)
-    }
 
     init {
         viewModelScope.launch {
@@ -29,17 +24,7 @@ class NearbyDeviceViewModel @Inject constructor(
                 .collectAndSetState { copy(devices = it.map()) }
         }
 
-        viewModelScope.launch {
-            connectToDeviceUseCase
-                .observe()
-                .collect { Log.d("TEST", "$it") }
-        }
-
         getNearbyDevicesUseCase(Unit)
-    }
-
-    fun connectToDevice(bluetoothDevice: BluetoothDevice) {
-        connectToDeviceUseCase(bluetoothDevice)
     }
 
 }
