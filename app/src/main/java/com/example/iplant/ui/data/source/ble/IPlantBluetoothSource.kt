@@ -1,5 +1,6 @@
 package com.example.iplant.ui.data.source.ble
 
+import com.example.iplant.ui.data.ble.PlantDeviceScanner
 import com.example.iplant.ui.domain.entity.PlantDeviceEntity
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +11,7 @@ import no.nordicsemi.android.support.v18.scanner.*
 
 
 class IPlantBluetoothSource @Inject constructor(
-    private val scanner: BluetoothLeScannerCompat,
+    private val plantDeviceScanner: PlantDeviceScanner,
     private val nearbyIPlantDeviceAggregator: NearbyIPlantDeviceAggregator
 ) {
 
@@ -21,9 +22,9 @@ class IPlantBluetoothSource @Inject constructor(
             }
         }
 
-        scanner.startScan(scanCallback)
+        plantDeviceScanner.startScanning(scanCallback)
 
-        awaitClose { scanner.stopScan(scanCallback) }
+        awaitClose { plantDeviceScanner.stopScanning(scanCallback) }
     }
 
 }
