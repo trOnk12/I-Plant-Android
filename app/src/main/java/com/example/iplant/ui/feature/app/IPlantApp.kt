@@ -2,6 +2,7 @@ package com.example.iplant.ui.feature.app
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.*
+import com.example.iplant.ui.common.extension.getArgument
 import com.example.iplant.ui.feature.devicedetail.DeviceDetailScreen
 import com.example.iplant.ui.feature.nearbydevice.NearByDeviceScreen
 import com.example.iplant.ui.feature.nearbydevice.model.PlantDevice
@@ -12,14 +13,14 @@ fun IPlant() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "nearbyDevice") {
-        composable("nearbyDevice") { NearByDeviceScreen(navController) }
+        composable(route = "nearbyDevice") {
+            NearByDeviceScreen(navController)
+        }
         composable(
-            "deviceDetails",
+            route = "deviceDetails",
         ) {
             DeviceDetailScreen(
-                navController.previousBackStackEntry
-                    ?.arguments?.getSerializable("nearbyDevice") as? PlantDevice
-                    ?: throw IllegalStateException()
+                nearbyDevice = navController.getArgument("nearbyDevice")
             )
         }
     }

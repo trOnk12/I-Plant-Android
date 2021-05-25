@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
+import com.example.iplant.ui.common.extension.putArgument
 import com.example.iplant.ui.feature.nearbydevice.model.PlantDevice
 
 
@@ -30,12 +31,10 @@ fun NearByDeviceScreen(
     if (nearbyDeviceState != null) {
         NearbyDeviceList(
             onClick = {
-                navHostController.currentBackStackEntry?.arguments?.putSerializable(
-                    "nearbyDevice",
-                    it
-                )
-
-                navHostController.navigate("deviceDetails")
+                with(navHostController) {
+                    putArgument("nearbyDevice", it)
+                    navigate("deviceDetails")
+                }
             },
             nearbyDevices = nearbyDeviceState!!.devices
         )

@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import com.example.iplant.ui.feature.nearbydevice.model.PlantDevice
 
 @Composable
-fun DeviceDetailScreen(deviceDetail: PlantDevice) {
+fun DeviceDetailScreen(nearbyDevice: PlantDevice) {
     Column {
-        Text(deviceDetail.lastSeen)
+        Text(nearbyDevice.lastSeen)
     }
 }
