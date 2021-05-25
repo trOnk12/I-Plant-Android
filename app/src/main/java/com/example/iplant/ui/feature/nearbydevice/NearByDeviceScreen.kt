@@ -1,6 +1,6 @@
 package com.example.iplant.ui.feature.nearbydevice
 
-import android.util.Log
+import android.os.Bundle
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -15,16 +15,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.navigate
 import com.example.iplant.ui.feature.nearbydevice.model.PlantDevice
 
-@Preview
+
 @Composable
-fun NearByDeviceScreen(nearbyDeviceViewModel: NearbyDeviceViewModel = hiltNavGraphViewModel()) {
+fun NearByDeviceScreen(
+    navHostController: NavHostController,
+    nearbyDeviceViewModel: NearbyDeviceViewModel = hiltNavGraphViewModel()
+) {
     val nearbyDeviceState by nearbyDeviceViewModel.liveData.observeAsState()
 
     if (nearbyDeviceState != null) {
         NearbyDeviceList(
-            onClick = { nearbyDeviceViewModel.connectToDevice(it.bluetoothDevice) },
+            onClick = {
+                navHostController.currentBackStackEntry?.arguments?.putSerializable(
+                    "nearbyDevice",
+                    it
+                )
+
+                navHostController.navigate("deviceDetails")
+            },
             nearbyDevices = nearbyDeviceState!!.devices
         )
     }
