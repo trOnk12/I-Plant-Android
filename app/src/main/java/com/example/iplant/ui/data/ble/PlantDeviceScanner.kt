@@ -16,18 +16,17 @@ import kotlin.collections.ArrayList
 @Singleton
 class PlantDeviceScanner @Inject constructor(private val scanner: BluetoothLeScannerCompat) {
 
-    fun startScanning(callback: ScanCallback) {
-        val settings: ScanSettings = ScanSettings.Builder()
-            .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
+    private val settings: ScanSettings = ScanSettings.Builder()
+        .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
+        .build()
+
+    private val filters: List<ScanFilter> = listOf(
+        ScanFilter.Builder()
+            .setServiceUuid(ParcelUuid(UUID.fromString("84b3571a-98d0-46fe-95c2-bb2fc4b126ad")))
             .build()
+    )
 
-        val filters: MutableList<ScanFilter> = ArrayList()
-        filters.add(
-            ScanFilter.Builder()
-                .setServiceUuid(ParcelUuid(UUID.fromString("84b3571a-98d0-46fe-95c2-bb2fc4b126ad")))
-                .build()
-        )
-
+    fun startScanning(callback: ScanCallback) {
         scanner.startScan(filters, settings, callback)
     }
 
