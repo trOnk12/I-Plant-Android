@@ -21,14 +21,14 @@ class EnrollDeviceUseCase @AssistedInject constructor(
 
     override fun createObservable(params: EnrollmentDataEntity) = flow {
         emit(Configuration)
-        plantDeviceBleManager.setDeviceName(params.name)
+      ///  plantDeviceBleManager.setDeviceName(params.name)
         emit(ConnectingToNetwork)
-        plantDeviceBleManager.connectToNetwork(
-            NetworkEntity(
-                params.networkName,
-                params.networkPassword
-            )
-        )
+//        plantDeviceBleManager.connectToNetwork(
+//            NetworkEntity(
+//                params.networkName,
+//                params.networkPassword
+//            )
+//        )
         emit(Completed)
     }
 

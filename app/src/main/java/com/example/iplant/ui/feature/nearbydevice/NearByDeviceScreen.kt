@@ -30,9 +30,9 @@ fun NearByDeviceScreen(
 
     if (nearbyDeviceState != null) {
         NearbyDeviceList(
-            onClick = {
+            onClick = { plantDevice ->
                 with(navHostController) {
-                    putArgument("nearbyDevice", it)
+                    putArgument("nearbyDevice", plantDevice)
                     navigate("deviceDetails")
                 }
             },

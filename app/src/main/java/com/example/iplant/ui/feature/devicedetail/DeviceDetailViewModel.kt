@@ -10,6 +10,12 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
+//1.Connect to device
+//2. After successfull connecting user enters name for plant
+
+// We need a singleton object that allows to manipulate characteristics after connected to device
+
 @HiltViewModel
 class DeviceDetailViewModel @Inject constructor(
     connectToDevicesUseCaseFactory: ConnectToDeviceUseCaseFactory,
@@ -19,16 +25,11 @@ class DeviceDetailViewModel @Inject constructor(
         connectToDevicesUseCaseFactory.create(viewModelScope)
     }
 
-    init {
-        viewModelScope.launch {
-            connectToDeviceUseCase
-                .observe()
-                .collect { Log.d("TEST", "$it") }
-        }
-    }
 
     fun connectToDevice(bluetoothDevice: BluetoothDevice) {
-        connectToDeviceUseCase(bluetoothDevice)
+        viewModelScope.launch {
+            connectToDeviceUseCase.executeSync(bluetoothDevice)
+        }
     }
 
 }
